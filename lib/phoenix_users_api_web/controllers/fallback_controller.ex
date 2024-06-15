@@ -13,4 +13,11 @@ defmodule PhoenixUsersApiWeb.FallbackController do
     |> put_view(html: PhoenixUsersApiWeb.ErrorHTML, json: PhoenixUsersApiWeb.ErrorJSON)
     |> render(:"404")
   end
+
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(403)
+    |> put_view(MyErrorView)
+    |> render(:"403")
+  end
 end
